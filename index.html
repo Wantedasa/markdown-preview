@@ -17,7 +17,21 @@
 <div style="display:flex;gap:16px;width:100%;max-width:620px;flex-wrap:wrap"><textarea id="md" style="flex:1;min-width:240px;height:160px;padding:12px;border-radius:10px;border:1px solid #30363d;background:#161b22;color:#e6edf3;font-family:ui-monospace,monospace"># Hello\n**bold** and *italic*\n- one\n- two</textarea><div id="out" style="flex:1;min-width:240px;height:160px;overflow:auto;padding:12px;border-radius:10px;border:1px solid #30363d;background:#161b22;text-align:left"></div></div>
 <p class="note">Minimal parser for demos — not a full CommonMark implementation.</p>
 <script>
-function render(s){s=s.replace(/&/g,'&amp;').replace(/</g,'&lt;');s=s.replace(/^# (.*)$/gm,'<h3>$1</h3>').replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\*(.+?)\*/g,'<i>$1</i>').replace(/^- (.*)$/gm,'<li>$1</li>').replace(/(<li>.*<\/li>)/s,'<ul>$1</ul>').replace(/\[(.+?)\]/(.+?)/g,'<a href="$2">$1</a>');return s;}var md=document.getElementById('md'),out=document.getElementById('out');function u(){out.innerHTML=render(md.value);}md.addEventListener('input',u);u();
+function render(s){
+  s=s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  s=s.replace(/^# (.*)$/gm,'<h3>$1</h3>');
+  s=s.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>');
+  s=s.replace(/\*(.+?)\*/g,'<i>$1</i>');
+  s=s.replace(/^- (.*)$/gm,'<li>$1</li>');
+  s=s.replace(/(<li>[\s\S]*?<\/li>)/g,'<ul>$1</ul>');
+  s=s.replace(/\[(.+?)\]\((.+?)\)/g,'<a href="$2">$1</a>');
+  return s;
+}
+var md=document.getElementById('md'),out=document.getElementById('out');
+function u(){out.innerHTML=render(md.value);}
+md.addEventListener('input',u);
+u();
+
 </script>
 </body>
 </html>
