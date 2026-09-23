@@ -6,24 +6,37 @@
 <title>Markdown Live Preview — free by wantedasa.dev</title>
 <style>
   * { box-sizing: border-box; }
-  body { margin:0; height:100%; overflow:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;
-    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background:#0d1117; color:#e6edf3; padding:18px; text-align:center; }
-  .tag { font-size:.8rem; color:#8b949e; }
-  .note { font-size:.8rem; color:#6b7280; max-width:520px; }
-  .row{display:flex;gap:12px;width:100%;max-width:620px;flex-wrap:nowrap}
-  #md,#out{flex:1 1 0;min-width:0;height:170px;padding:12px;border-radius:10px;border:1px solid #30363d;background:#161b22}
-  #md{font-family:ui-monospace,monospace;color:#e6edf3;resize:none}
-  #out{overflow:auto;color:#e6edf3;text-align:left}
-  #out h3{margin:.2em 0;color:#e6edf3}
-  #out ul{margin:.3em 0;padding-left:1.2em}
-  #out a{color:#58a6ff}
+  body { margin:0; height:100%; overflow:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background:#0d1117; color:#e6edf3; padding:18px; }
+  .note { font-size:.78rem; color:#6b7280; max-width:560px; text-align:center; }
+  .row{display:flex; gap:14px; width:100%; max-width:620px; flex-wrap:nowrap}
+  .pane{flex:1 1 0; min-width:0; display:flex; flex-direction:column; gap:6px}
+  .pane .lbl{font-size:.72rem; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:#8b949e}
+  .box{flex:1; height:168px; padding:12px 14px; border-radius:10px; border:1px solid #30363d; background:#161b22; font-size:.9rem; line-height:1.5}
+  #md{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#e6edf3; resize:none; outline:none}
+  #md:focus{border-color:rgba(47,129,247,.6)}
+  #out{overflow:auto; text-align:left; color:#c9d1d9}
+  #out h3{margin:.1em 0 .35em; color:#58a6ff; font-size:1.05rem; font-family:'Space Grotesk','Inter',sans-serif}
+  #out ul{margin:.3em 0; padding-left:1.2em}
+  #out a{color:#58a6ff; text-decoration:none}
+  #out a:hover{text-decoration:underline}
+  #out b,#out i{color:#e6edf3}
 </style>
 </head>
 <body>
-<div class="row"><textarea id="md" spellcheck="false"># Hello
+<div class="row">
+  <div class="pane">
+    <span class="lbl">Markdown</span>
+    <textarea id="md" class="box" spellcheck="false"># Hello
 **bold** and *italic*
 - one
-- two</textarea><div id="out"></div></div>
+- two</textarea>
+  </div>
+  <div class="pane">
+    <span class="lbl">Preview</span>
+    <div id="out" class="box"></div>
+  </div>
+</div>
 <p class="note">Minimal parser for demos — not a full CommonMark implementation.</p>
 <script>
 function render(s){
